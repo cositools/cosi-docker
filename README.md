@@ -5,9 +5,9 @@ This repository contains a Dockerfile to install COSItools in an Ubuntu docker c
 ## Installation:
 
 This installation assumes you have docker installed and configured. Please see the docker documentation on how to do that.
-It also assumes you have set it up to run without sudo. On Linux yo just have to add the user to the docker group and logout and login again.
+It also assumes you have set it up to run without sudo. On Linux you just have to add the user to the docker group and logout and login again.
 
-Then clone this repository::
+Then clone this repository:
 ```
 git clone https://github.com/cositools/cosi-docker
 cd cosi-docker
@@ -37,11 +37,11 @@ EXCHANGE_DIRECTORY="${HOME}/COSIDockerData"
 ```
 Please create this directory if it does not yet exist.
 
-How to start up the conatiner depends on your OS:
+How to start up the container and use the UI depends on your OS.
 
 #### Ubuntu and probably most Linux versions::
 
-Perform the following preparation to see X applications:
+Perform the following preparations to see X applications:
 ```
 XSOCK=/tmp/.X11-unix
 XAUTH=/tmp/.docker.xauth
