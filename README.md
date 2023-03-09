@@ -1,6 +1,6 @@
 # cosi-docker
 
-This repository contains a Dockerfile to install COSItools in an Ubuntu docker container
+This repository contains a Dockerfile to install the COSItools in an Ubuntu docker container.
 
 ## Installation:
 
