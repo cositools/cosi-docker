@@ -21,7 +21,7 @@ RUN cd /home/cosi && /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.co
 RUN echo . /home/cosi/COSItools/source.sh >> /home/cosi/.bashrc
 
 # Create exchange directory
-RUN mkdir /home/cosi/exchange
+RUN mkdir /home/cosi/COSIDockerData
 
 # Switch back to ROOT
 USER root
@@ -36,6 +36,6 @@ RUN    cd /usr/local/bin \
     && chmod a+rx /usr/local/bin/entrypoint.sh
 
 # The working directory is the COSItools directory
-WORKDIR /home/cosi/COSItools
+WORKDIR /home/cosi/COSIDockerData
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
