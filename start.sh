@@ -60,9 +60,10 @@ if [[ $(uname -a) == *inux* ]]; then
   xauth nlist ${DISPLAY} | sed -e 's/^..../ffff/' | xauth -f ${XAUTH} nmerge -
   docker run -v ${EXCHANGE_DIRECTORY}:/home/cosi/COSIDockerData -e DISPLAY=${DISPLAY} -v ${XSOCK}:${XSOCK} -v ${XAUTH}:${XAUTH} --net=host -e USERID=`id -u ${USER}` -e GROUPID=`id -g ${USER}` -it cosi-main
 elif [[ $(uname -a) == *arwin* ]]; then
-  YOUR_IP=$(ifconfig | grep "inet " | grep -v 127.0.0.1 | awk '{ print $2 }'); echo "Your IP: ${YOUR_IP}"
+  XSOCK=/tmp/.X11-unix.${USER}
+  YOUR_IP=$(ifconfig | grep "inet " | grep -v 127.0.0.1 | awk '{ print $2 }')
   xhost +${YOUR_IP}
-  docker run --rm -it -v ${EXCHANGE_DIRECTORY}:/home/cosi/COSIDockerData -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=${YOUR_IP}:0  cosi-main
+  docker run -v ${EXCHANGE_DIRECTORY}:/home/cosi/COSIDockerData -e DISPLAY=${YOUR_IP}:0 -v ${XSOCK}:${XSOCK} -it cosi-main
 else
   echo "Unsupported OS"
 fi
