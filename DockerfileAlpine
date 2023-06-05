@@ -1,0 +1,41 @@
+# Dockerfile for COSItools
+# 
+# Build the docker with:
+# docker build -t alpine-osi-main - < DockerfileAlpine
+
+FROM alpine:3.18
+
+MAINTAINER Andreas Zoglauer <zoglauer@berkeley.edu>
+
+# Install all the COSItools prerequisites
+RUN apk update && apk upgrade & apk add bind-tools vim nano bash git git-lfs libstdc++ gcompat gawk make gcc g++ gfortran patch libtbb-dev gdb valgrind binutils libx11 libxpm libxft-dev libxext-dev openssl pcre glu glew ftgl fftw graphviz avahi libldap python3 tk libxml2 krb5 gsl cmake libxmu libxpm-dev curl doxygen blas lapack expect dos2unix ncurses boost-dev cfitsio-dev xerces-c-dev
+
+# Add COSI user
+RUN adduser -D cosi
+
+# Switch to user cosi
+USER cosi
+
+# Setup 
+#RUN cd /home/cosi && /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/cositools/cosi-setup/main/setup.sh)"
+#RUN echo . /home/cosi/COSItools/source.sh >> /home/cosi/.bashrc
+
+# Create exchange directory
+#RUN mkdir /home/cosi/COSIDockerData
+
+# Switch back to ROOT
+#USER root
+
+# Create entry-point script - changes the UID of cosi to the local USER and group for full access to the exchange directory on all machines
+#RUN    cd /usr/local/bin \
+#    && echo '#!/bin/bash' >> entrypoint.sh \
+#    && echo 'if [ "${USERID}" != "" ]; then usermod -u ${USERID} cosi; fi' >> entrypoint.sh \
+#    && echo 'if [ "${GROUPID}" != "" ]; then groupmod -g ${GROUPID} cosi; fi' >> entrypoint.sh \
+#    && echo 'if [ "${USERID}" != "" ] || [ "${GROUPID}" != "" ]; then chown -R cosi:cosi /home/cosi; fi' >> entrypoint.sh \
+#    && echo 'gosu cosi bash' >> entrypoint.sh \
+#    && chmod a+rx /usr/local/bin/entrypoint.sh
+
+# The working directory is the COSItools directory
+#WORKDIR /home/cosi/COSIDockerData
+
+#ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
