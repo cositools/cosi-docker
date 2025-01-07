@@ -24,11 +24,19 @@ It will also create a directory ~/COSIDockerData, where you can exchange files b
 
 ### Manually
 
+#### Build
+
+##### podman
+
+podman build -f Dockerfile -t cosi-main
+
+##### Docker
+
 First create your container via:
 ```
 docker build -t cosi-main - < Dockerfile
 ```
-
+#### Setup
 
 We assume that you want to keep all you data on your host system and not in your docker container. 
 For this tutorial, this directory is named:
